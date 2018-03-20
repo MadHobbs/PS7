@@ -261,7 +261,7 @@ class MulticlassSVM :
         
         # HERE IS ONE WAY (THERE MAY BE OTHER APPROACHES)
         for classifier in range(num_classifiers):
-        # keep two lists, pos_ndx and neg_ndx, that store indices
+            # keep two lists, pos_ndx and neg_ndx, that store indices
         #   of examples to classify as pos / neg for current binary task
             pos_ndx = np.zeros(0,dtype=int) #store row
             neg_ndx = np.zeros(0,dtype= int)
@@ -401,7 +401,7 @@ def main() :
         for R in R_list : 
     #   train a multiclass SVM on training data and evaluate on test data
     #   setup the binary classifiers using the specified parameters from the handout
-            clf = MulticlassSVM(R = R)
+            clf = MulticlassSVM(R = R, kernel='poly', degree = 4, coef0 = 1, gamma = 1.0)
             clf.fit(train_data.X, train_data.y)
             pred = clf.predict(test_data.X, loss_func=loss_func)
             print '-----------------'

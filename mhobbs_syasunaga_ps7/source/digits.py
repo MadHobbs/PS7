@@ -162,7 +162,7 @@ def main():
     # calculate accuracy of bagging ensemble and random forest
     #   for 100 random training and test set splits
     # make sure to use same splits to enable proper comparison
-    '''max_features_vector = range(1,65,2)
+    max_features_vector = range(1,65,2)
     bagging_scores = []
     random_forest_scores = collections.defaultdict(list)
     for i in range(num_trials):
@@ -192,7 +192,7 @@ def main():
         random_forest_scores.append(random_forest(X_train, y_train, X_test, y_test, 8,
                                     bagging=bagging))
     plot_histograms(bagging_scores, random_forest_scores)
-    '''
+    
     ### ========== TODO : START ========== ###
     # part b: determine pixel importance
     clf = RandomForestClassifier(criterion="entropy")
