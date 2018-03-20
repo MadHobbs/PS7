@@ -1,0 +1,56 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{framed}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\setlength{\columnsep}{1in}
+\begin{document}
+
+\newcommand{\Name}[1]{\noindent \textbf{Name:} #1 \\}
+\newcommand{\pderiv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\psderiv}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+
+\begin{center}
+    \bf
+    Machine Learning \\
+    Computer Science 158 \\
+    Spring 2017 \\
+    \rm
+    Problem Set 6\\
+    Due:  March 5 at 11:59 PM \\
+\end{center}
+\noindent \textbf{Name: Madison Hobbs} \\
+
+%-------------------- Problem 1 -----------------------%
+
+\section{Feature Extraction [2 pts]}
+
+\section{Digit Recognition using Bagging [5+3 pts]}
+
+In this problem, we will study bagging and random forest on a handwritten digit dataset. This dataset contains 1797 samples (each having 64 features) of hand-written digits, classified into 10 classes.4 However, for this problem, we will only use 720 examples from 4 classes.
+
+\begin{enumerate}[(a)]
+	\item \textbf{(3 pts)} Run \verb+main(...)+ to compare the performance of these ensemble classifiers using 100 random splits of the digits dataset into training and test sets, where the test set contains roughly 20\% of the data. This generates two plots : 
+We vary the number of features considered for the random forest from 1 to 65 (in step sizes of 2). Then, on a single plot, we plot the accuracy of the bagging classifier against that of the random forest with varying number of features. (Note: This code may take several minutes to run.)
+
+\begin{center}
+\includegraphics[width = 15cm, height = 10cm]{bag_vs_rf.png}
+\end{center}
+Include these plots in your writeup. How does performance vary with the number of features considered per split? Which classifier performs better, and why?
+
+\textbf{Solution: \\ \\ Random Forest performance varies with the number of features considered at each split, while the bagged trees remains constant. The Random Forest always performed better(higher accuracy) than bagged trees. This is probably because the Random Forest has decorrelated trees (each trained using a different subset of features) whereas bagging pulls from the same pool of features in each tree, making them essentially the same/correlated.}
+
+	\item \textbf{(2 pts)} One useful application of bagging ensembles is to assess the relative importance of features. In your own words, describe how you think feature importance might be calculated when using Decision Trees as your base classifier. 
+
+\textbf{Solution: \\ We can add up how much each feature, when used to make a split, increases information gain over all the trees.}
+
+\end{enumerate}
+
+\end{document}
