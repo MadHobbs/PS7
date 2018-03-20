@@ -260,7 +260,6 @@ class MulticlassSVM :
         # part c: train binary classifiers
         
         # HERE IS ONE WAY (THERE MAY BE OTHER APPROACHES)
-        
         for classifier in range(num_classifiers):
         # keep two lists, pos_ndx and neg_ndx, that store indices
         #   of examples to classify as pos / neg for current binary task
@@ -270,23 +269,26 @@ class MulticlassSVM :
             # for each class C
             for i in range(len(self.classes)) :
         # a) find indices for which examples have class equal to C
-        #    [use np.nonzero(CONDITION)[0]]
-                rows = np.nonzero(y == self.classes[i])[0]
+        #    [use np.nonzero(CONDITION)[0]]p
+                
         # b) update pos_ndx and neg_ndx based on output code R[i,j]
         #    where i = class index, j = classifier index
                 if self.R[i, classifier] == 1 :
+                    rows = np.nonzero(y == self.classes[i])[0]
                     pos_ndx = np.append(pos_ndx, rows)
                 if self.R[i, classifier] == -1 :
+                    rows = np.nonzero(y == self.classes[i])[0]
                     neg_ndx = np.append(neg_ndx, rows)
         # set X_train using X with pos_ndx and neg_ndx
-
-            X_train = np.vstack((X[pos_ndx,:], X[neg_ndx, :]))
+            train_index = np.append(pos_ndx,neg_ndx)
+            X_train = (X[train_index,:])
         # set y_train using y with pos_ndx and neg_ndx
             y_train = np.append(np.ones(len(pos_ndx)), -np.ones(len(neg_ndx)))
         #     y_train should contain only {+1,-1}
         #
         # train the binary classifier
             self.svms[classifier].fit(X_train, y_train)
+
         
         return self
 
@@ -320,16 +322,17 @@ class MulticlassSVM :
         # HERE IS ONE WAY (THERE MAY BE OTHER APPROACHES)
         #
         # for each example
-        for row in range(n):
-            discrim_func = np.zeros(0)
+        discrim_func = np.zeros(n)
         #   predict distances to hyperplanes using SVC.decision_function(...)
-            for svm in self.svms :
-                distance = svm.decision_function(X[row, :])
-                discrim_func = np.append(discrim_func, distance)
+        for svm in self.svms :
+            distance = svm.decision_function(X)
+            discrim_func = np.vstack((discrim_func, distance))
         #   find class with minimum loss (be sure to look up in self.classes)
         #   if you have a choice between multiple occurrences of the minimum values,
         #   use the index corresponding to the first occurrence
-            losses = loss_func(self.R, discrim_func)
+
+        for row in range(n):
+            losses = loss_func(self.R, discrim_func[1:,row])
             pred_class_ndx = np.argmin(losses) # index of minimum loss
             y[row] = self.classes[pred_class_ndx]
     
@@ -393,6 +396,7 @@ def main() :
     import warnings
     warnings.filterwarnings("ignore",category=DeprecationWarning)
     # for each output code and loss function
+
     for loss_func in loss_func_list :
         for R in R_list : 
     #   train a multiclass SVM on training data and evaluate on test data
@@ -400,9 +404,12 @@ def main() :
             clf = MulticlassSVM(R = R)
             clf.fit(train_data.X, train_data.y)
             pred = clf.predict(test_data.X, loss_func=loss_func)
+            print '-----------------'
+            print '                 '
             print str(loss_func)
             print code_itr.next()
-            print "support vecs: " + str(clf.svms[0].support_)
+            print "support vecs:1 " + str(clf.svms[0].support_)
+            print "support vecs:2 " + str(clf.svms[1].support_)
             num_errors = sum(pred != test_data.y)
             print "number of erros: " + str(num_errors)      
     # if you implemented MulticlassSVM.fit(...) correctly,
