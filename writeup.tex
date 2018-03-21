@@ -58,7 +58,7 @@ Now, using scikit-learn’s examples as a guideline, generate a representation o
 What do you observe? Is this surprising?
 
 \textbf{Solution: \\ We can add up over all the trees how much each feature, when used to make a split, increases information gain. This can measure the importance of that feature by effectively measuring how much it contributes to information gain (how important it is in terms of gaining information about predicting the labels). \\
-Below, we see a heat map of the feature importance for this problem. It is a bit suprising how there is just one single pixel in the center that is vastly important, while many pixels (on the periphery) are not that important. 
+Below, we see a heat map of the feature importance for this problem. We notice there is just one single pixel in the center that is vastly important, while many pixels (on the periphery) are not that important. It makes sense that pixels on the periphery are not as important (they may not even contain the digit) while pixels towards the center are more important. It is a bit shocking however just how important that one pixel in the center is. 
 \begin{center}
 \includegraphics[width = 10cm, height = 10cm]{heatmap.png}
 \end{center} }
