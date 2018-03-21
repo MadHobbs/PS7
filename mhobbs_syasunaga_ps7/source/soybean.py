@@ -360,6 +360,13 @@ def main() :
 
     # graph
     z = np.arange(-2, 2, 0.1)
+
+    # exponential : Loss = exp(z)
+    expo = np.exp(-z)
+    plt.plot(z, expo, label = "exponential loss")
+    plt.legend()
+    plt.show()
+
     # hamming  : Loss  = (1 - sign(z)) / 2
     hamming = np.abs(1 - np.sign(z)) * 0.5
     # sigmoid  : Loss = 1 / (1 + exp(alpha * z))

@@ -43,13 +43,25 @@ We vary the number of features considered for the random forest from 1 to 65 (in
 \begin{center}
 \includegraphics[width = 15cm, height = 10cm]{bag_vs_rf.png}
 \end{center}
+
+\begin{center}
+\includegraphics[width = 15cm, height = 10cm]{accuracy.png}
+\end{center}
 Include these plots in your writeup. How does performance vary with the number of features considered per split? Which classifier performs better, and why?
 
-\textbf{Solution: \\ \\ Random Forest performance varies with the number of features considered at each split, while the bagged trees remains constant. The Random Forest always performed better(higher accuracy) than bagged trees. This is probably because the Random Forest has decorrelated trees (each trained using a different subset of features) whereas bagging pulls from the same pool of features in each tree, making them essentially the same/correlated.}
+\textbf{Solution: \\ \\ Random Forest performance varies with the number of features considered at each split, while the bagged trees remains constant. The Random Forest consistently performed better (higher accuracy) than bagged trees. This is probably because the Random Forest has decorrelated trees (each trained using a different subset of features) whereas bagging pulls from the same pool of features in each tree, making them essentially the same/correlated.}
 
 	\item \textbf{(2 pts)} One useful application of bagging ensembles is to assess the relative importance of features. In your own words, describe how you think feature importance might be calculated when using Decision Trees as your base classifier. 
 
-\textbf{Solution: \\ We can add up how much each feature, when used to make a split, increases information gain over all the trees.}
+Now, using scikit-learn’s examples as a guideline, generate a representation of the relative importance of each individual pixel for digit recognition (include this plot in your writeup). For this problem, you are allowed to use \verb+sklearn.ensemble.RandomForestClassifier+.
+
+What do you observe? Is this surprising?
+
+\textbf{Solution: \\ We can add up over all the trees how much each feature, when used to make a split, increases information gain. This can measure the importance of that feature by effectively measuring how much it contributes to information gain (how important it is in terms of gaining information about predicting the labels). \\
+Below, we see a heat map of the feature importance for this problem. It is a bit suprising how there is just one single pixel in the center that is vastly important, while many pixels (on the periphery) are not that important. 
+\begin{center}
+\includegraphics[width = 10cm, height = 10cm]{heatmap.png}
+\end{center} }
 
 \end{enumerate}
 
