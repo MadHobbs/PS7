@@ -362,10 +362,10 @@ def main() :
     z = np.arange(-2, 2, 0.1)
 
     # exponential : Loss = exp(z)
-    expo = np.exp(-z)
-    plt.plot(z, expo, label = "exponential loss")
-    plt.legend()
-    plt.show()
+    #expo = np.exp(-z)
+    #plt.plot(z, expo, label = "exponential loss")
+    #plt.legend()
+    #plt.show()
 
     # hamming  : Loss  = (1 - sign(z)) / 2
     hamming = np.abs(1 - np.sign(z)) * 0.5
@@ -389,7 +389,7 @@ def main() :
     plt.plot(z, log1, label = "logistic, alpha = 1")
     plt.plot(z, log2, label = "logistic, alpha = 2")
     plt.legend()
-    # plt.show()
+    plt.show()
 
     # parts c-e : train component classifiers, make predictions,
     #             compare output codes and loss functions

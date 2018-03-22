@@ -23,14 +23,47 @@
     Computer Science 158 \\
     Spring 2017 \\
     \rm
-    Problem Set 6\\
-    Due:  March 5 at 11:59 PM \\
+    Problem Set 7\\
+    Due:  March 21 at 11:59 PM \\
 \end{center}
-\noindent \textbf{Name: Madison Hobbs} \\
+\noindent \textbf{Name: Madison Hobbs and Shota Yasunaga} \\
 
 %-------------------- Problem 1 -----------------------%
 
 \section{Feature Extraction [2 pts]}
+
+\begin{enumerate}[(a)]
+	\item We implemented \verb+generate_output_codes+.
+	\item Below is a plot of the three loss functions $g(z)$ for $z \in [-2, 2]$. 
+\begin{center}
+\includegraphics[width = 15cm, height = 10cm]{loss_funcs.png}
+\end{center}
+	\item We implemented \verb+MulticlassSVM.fit(...)+.
+	\item We implemented \verb+MulticlassSVM.predict(...)+.
+	\item Note the following table summarizing our results:
+\begin{center}
+\begin{tabular}{  c | c | c | c | } 
+& hamming loss & sigmoid loss & logistic loss \\
+\hline
+one versus all & 54 & 46 & 46\\ 
+\hline
+one versus one & 41 & 48 & 42\\ 
+\hline
+random (R1) & 38 & 38 & 33\\ 
+\hline
+random (R2) & 34 & 35 & 34\\ 
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[i.]
+	\item For each output code, how do the different loss functions affect the classification results, and why? (You may want to refer back to your plots of the various loss functions.) You do not have to comment on every combination of output code and classifier. Pick the cases that stand out to you, and write a short paragraph (about 5 sentences).
+
+	For OVA output code, hamming loss is worst, while sigmoid and logistic losses give equally lower error. 
+
+\end{enumerate}
+
+\end{enumerate}
 
 \section{Digit Recognition using Bagging [5+3 pts]}
 
