@@ -1,5 +1,5 @@
 """
-Author      : Madison Hobbs and Yi-Chieh Wu
+Author      : Madison Hobbs and Shota Yasunaga
 Class       : HMC CS 158
 Date        : 2018 Mar 05
 Description : Bagging with Digits Dataset
