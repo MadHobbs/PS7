@@ -58,12 +58,16 @@ random (R2) & 34 & 35 & 34\\
 
 
 	\item For each output code, how do the different loss functions affect the classification results, and why? (You may want to refer back to your plots of the various loss functions.) You do not have to comment on every combination of output code and classifier. Pick the cases that stand out to you, and write a short paragraph (about 5 sentences). \\
-
+	\textbf{Solution: \\
 	For OVA output code, hamming loss is worst, while sigmoid and logistic losses give equally lower error. Hamming loss says: I don't care much about the magnitude of the error, just whether there's an error or not. However, sigmoid and logisitc loss both penalize more eggregious errors more. The difference between sigmoid and logistic loss is that with logistic loss, we penalize worse errors increasingly more (absolute value of slope increases) whereas with sigmoid loss, we penalize worse errors more but at a decreasing rate (absolute value of slope decreases). We might expect, therefore, for logistic loss to yield a classifier which lets the fewest errors through (lowest error rate). We see that for all the output codes, logistic loss yields as good or better results than the other two loss functions. Only with OVO does hamming loss produce 1 fewer errors than logisitic loss. This could be an artifact of the dataset, and in essense, hamming and logistic losses tie here. It's interesting how hamming loss and logistic loss outperform sigmoid loss in OVO while in all other cases sigmoid and logistic outperform hamming loss (or essentially tie with it). \\
+	In OVA, hamming loss does the worst and in OVO sigmoid loss does the worst. This might be because in OVA, we are using all of the samples and thus we are more sure about the result of classification. On the other hand, in OVO, we are essentially using only 2 classes and thus we are less sure about the result of classification. So, over 
+	}
 
 	\item What kind of output code do you think is most suitable for this problem? Why do you think this is the case? Write a short paragraph (about 5 sentences). \\
-
-	Both random output codes yielded the lowest error, so it seems a random output code is most suitable for this problem. Perhaps this is because OVO and OVA are too systematic in checking each class against the other. Maybe the soybean diseases we are predicting are correlated and a lot of the classifiers produced using OVO or OVA are meaningless or fitting to noise. Random output codes may fix this (although it's possible randomness could yield worse classifiers.) Perhaps random output codes homogenize comparisons. 
+	\textbf{Solution: \\
+	Both random output codes yielded the lowest error, so it seems a random output code is most suitable for this problem. Perhaps this is because OVO and OVA are too systematic in checking each class against the other. Maybe the soybean diseases we are predicting are correlated and a lot of the classifiers produced using OVO or OVA are meaningless or fitting to noise. Random output codes may fix this (although it's possible randomness could yield worse classifiers.) Perhaps random output codes homogenize comparisons.\\
+	The problem with OVO might be also that the sample sizes for each classifier is smaller and the problem with the OVA might be that the the samples might get unbalanced. However, random uses all of the examples and would yield probabilistically more balanced. 
+	 }
 
 \end{enumerate}
 
@@ -86,7 +90,7 @@ We vary the number of features considered for the random forest from 1 to 65 (in
 \end{center}
 Include these plots in your writeup. How does performance vary with the number of features considered per split? Which classifier performs better, and why?
 
-\textbf{Solution: \\ \\ Random Forest performance varies with the number of features considered at each split, while the bagged trees remains constant. The Random Forest consistently performed better (higher accuracy) than bagged trees. This is probably because the Random Forest has decorrelated trees (each trained using a different subset of features) whereas bagging pulls from the same pool of features in each tree, making them essentially the same/correlated.}
+\textbf{Solution: \\ \\ Random Forest performance varies with the number of features considered at each split, while the bagged trees remains constant. The Random Forest consistently performed better (higher accuracy) than bagged trees. This is probably because the Random Forest has uncorrelated trees (each trained using a different subset of features) whereas bagging pulls from the same pool of features in each tree, making them essentially the same/correlated.}
 
 	\item \textbf{(2 pts)} One useful application of bagging ensembles is to assess the relative importance of features. In your own words, describe how you think feature importance might be calculated when using Decision Trees as your base classifier. 
 
