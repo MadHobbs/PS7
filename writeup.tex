@@ -40,6 +40,8 @@
 \end{center}
 	\item We implemented \verb+MulticlassSVM.fit(...)+.
 	\item We implemented \verb+MulticlassSVM.predict(...)+.
+	\item 
+\begin{enumerate}[i.]
 	\item Note the following table summarizing our results:
 \begin{center}
 \begin{tabular}{  c | c | c | c | } 
@@ -56,10 +58,14 @@ random (R2) & 34 & 35 & 34\\
 \end{tabular}
 \end{center}
 
-\begin{enumerate}[i.]
-	\item For each output code, how do the different loss functions affect the classification results, and why? (You may want to refer back to your plots of the various loss functions.) You do not have to comment on every combination of output code and classifier. Pick the cases that stand out to you, and write a short paragraph (about 5 sentences).
 
-	For OVA output code, hamming loss is worst, while sigmoid and logistic losses give equally lower error. 
+	\item For each output code, how do the different loss functions affect the classification results, and why? (You may want to refer back to your plots of the various loss functions.) You do not have to comment on every combination of output code and classifier. Pick the cases that stand out to you, and write a short paragraph (about 5 sentences). \\
+
+	For OVA output code, hamming loss is worst, while sigmoid and logistic losses give equally lower error. Hamming loss says: I don't care much about the magnitude of the error, just whether there's an error or not. However, sigmoid and logisitc loss both penalize more eggregious errors more. The difference between sigmoid and logistic loss is that with logistic loss, we penalize worse errors increasingly more (absolute value of slope increases) whereas with sigmoid loss, we penalize worse errors more but at a decreasing rate (absolute value of slope decreases). We might expect, therefore, for logistic loss to yield a classifier which lets the fewest errors through (lowest error rate). We see that for all the output codes, logistic loss yields as good or better results than the other two loss functions. Only with OVO does hamming loss produce 1 fewer errors than logisitic loss. This could be an artifact of the dataset, and in essense, hamming and logistic losses tie here. It's interesting how hamming loss and logistic loss outperform sigmoid loss in OVO while in all other cases sigmoid and logistic outperform hamming loss (or essentially tie with it). \\
+
+	\item What kind of output code do you think is most suitable for this problem? Why do you think this is the case? Write a short paragraph (about 5 sentences). \\
+
+	Both random output codes yielded the lowest error, so it seems a random output code is most suitable for this problem. Perhaps this is because OVO and OVA are too systematic in checking each class against the other. Maybe the soybean diseases we are predicting are correlated and a lot of the classifiers produced using OVO or OVA are meaningless or fitting to noise. Random output codes may fix this (although it's possible randomness could yield worse classifiers.) Perhaps random output codes homogenize comparisons. 
 
 \end{enumerate}
 
